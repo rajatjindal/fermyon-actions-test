@@ -1,4 +1,4 @@
-name: Deploy
+name: Python
 
 # Deploy only when a change is pushed or merged to `main`
 on:
