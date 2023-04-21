@@ -1,0 +1,33 @@
+name: Deploy
+
+# Deploy only when a change is pushed or merged to `main`
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  spin:
+    runs-on: ubuntu-latest
+    name: Build and deploy
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: "Install Go"
+        uses: actions/setup-go@v3
+        with:
+          go-version: "1.20"
+
+      - name: "Install TinyGo"
+        uses: rajatjindal/setup-actions/tinygo@v0.0.1
+        with:
+          version: v0.27.0
+
+      - name: Install Spin
+        uses: fermyon/actions/spin/setup@v1
+
+      - name: Build and deploy
+        run: |
+          spin new http-go http-go-test --accept-defaults
+          cd http-go-test
+          spin build
