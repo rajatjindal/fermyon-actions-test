@@ -26,6 +26,7 @@ jobs:
 
       - name: Build and deploy
         run: |
+          spin templates install --git https://github.com/fermyon/spin
           spin new http-go http-go-test --accept-defaults
           cd http-go-test
           spin build
