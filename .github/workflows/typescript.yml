@@ -21,4 +21,5 @@ jobs:
           spin templates install --git https://github.com/fermyon/spin-js-sdk
           spin new http-ts http-ts-test --accept-defaults
           cd http-ts-test
+          npm install
           spin build
