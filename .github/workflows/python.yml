@@ -1,0 +1,26 @@
+name: Deploy
+
+# Deploy only when a change is pushed or merged to `main`
+on:
+  workflow_dispatch: {}
+
+jobs:
+  spin:
+    runs-on: ubuntu-latest
+    name: Build and deploy
+    steps:
+      - uses: actions/checkout@v3
+
+      # Python build requires the py2wasm plugin
+      - name: Install Spin
+        uses: fermyon/actions/spin/setup@v1
+        with:
+          plugins: py2wasm
+
+      - name: Build and deploy
+        uses: fermyon/actions/spin/deploy@v1
+        with:
+          spin templates install --git https://github.com/fermyon/spin
+          spin new http-py http-py-test --accept-defaults
+          cd http-py-test
+          spin build
