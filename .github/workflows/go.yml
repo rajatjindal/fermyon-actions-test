@@ -2,9 +2,7 @@ name: Deploy
 
 # Deploy only when a change is pushed or merged to `main`
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch: {}
 
 jobs:
   spin:
