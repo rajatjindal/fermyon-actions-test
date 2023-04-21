@@ -1,4 +1,4 @@
-name: Deploy
+name: Golang
 
 # Deploy only when a change is pushed or merged to `main`
 on:
