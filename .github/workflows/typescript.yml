@@ -1,0 +1,24 @@
+name: Typescript
+
+# Deploy only when a change is pushed or merged to `main`
+on:
+  workflow_dispatch: {}
+
+jobs:
+  spin:
+    runs-on: ubuntu-latest
+    name: Build and deploy
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install Spin
+        uses: fermyon/actions/spin/setup@v1
+        with:
+          plugins: js2wasm
+
+      - name: Build and deploy
+        run: |
+          spin templates install --git https://github.com/fermyon/spin-js-sdk
+          spin new http-ts http-ts-test --accept-defaults
+          cd http-ts-test
+          spin build
