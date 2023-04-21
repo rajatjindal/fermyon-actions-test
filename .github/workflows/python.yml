@@ -18,8 +18,7 @@ jobs:
           plugins: py2wasm
 
       - name: Build and deploy
-        uses: fermyon/actions/spin/deploy@v1
-        with:
+        run: |
           spin templates install --git https://github.com/fermyon/spin
           spin new http-py http-py-test --accept-defaults
           cd http-py-test
